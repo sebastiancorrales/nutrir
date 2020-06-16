@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nutrir</title>
     <link rel="stylesheet" href="libs\css\bootstrap.min.css">
+    <link rel="stylesheet" href="css\main.css">
 </head>
 <body>
     <?php
@@ -13,5 +14,6 @@
     <script src="libs\js\jquery.min.js"></script>
     <script src="libs\js\popper.js"></script>
     <script src="libs\js\bootstrap.min.js"></script>
+    <script src="js\main.js"></script>
 </body>
 </html>

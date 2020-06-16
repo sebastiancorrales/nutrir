@@ -1,11 +1,25 @@
 <div class="container-sm">
-
+<div class="progress">
+            <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0"
+                aria-valuemax="2">
+            </div>
+        </div>
+        <div class="option-control">
+            <div class="row">
+                <div class="col">
+                    <button class=" mx-auto btn btn-sm btn-info" id="atras" type="button">&laquo;</button>
+                </div>
+                <div class="col">
+                <button class="mx-auto btn btn-sm btn-info" id="adelante" type="button">&raquo;</button>
+                </div>
+            </div>
+        </div>
     <section class="datos-generales">
         <div class="form">
 
             <h1>Datos Generales</h1>
-            <form action="" method="POST">
-                <input type="hidden" name="datos_generales" value="datos_generales">
+            <form action="index.php?controller=beneficiario&action=store" method="POST">
+                <input type="hidden" name="type_form" value="datos_generales">
                 <div class="form-row">
                     <div class="col">
                         <input type="text" class="form-control" name="primer_nombre" placeholder="Primer Nombre"
@@ -47,8 +61,8 @@
                         </select>
                     </div>
                     <div class="col">
-                        <label for="genero">Estado Civil</label>
-                        <select class="custom-select" name="genero" id="genero">
+                        <label for="">Estado Civil</label>
+                        <select class="custom-select" name="estado_civil" id="">
                             <option value="SOLTERO">Soltero</option>
                             <option value="CASADO">Casad</option>
                             <option value="OTRO">Otro</option>
@@ -63,9 +77,9 @@
     <section class="datos-institucionales">
 
         <div class="form">
-            <form action="">
-
-                <h1>Datos Institucionales</h1>
+            <h1>Datos Institucionales</h1>
+        <form action="index.php?controller=beneficiario&action=store" method="POST">
+                <input type="hidden" name="type_form" value="datos_institucionales">
                 <div class="form-row">
                     <div class="col">
                         <input type="text" class="form-control" name="pais_nacimiento" placeholder="Pais de Nacimiento"
@@ -126,7 +140,7 @@
                             <input class="form-control" type="number" name="peso_ingreso" placeholder="Peso al Ingreso">
                         </div>
                         <div class="row">
-                            <input class="form-control" type="number" name="peso_ingreso"
+                            <input class="form-control" type="number" name="talla_ingreso"
                                 placeholder="Talla al Ingreso">
                         </div>
                     </div>
@@ -137,15 +151,16 @@
                 </div>
                 <label for="acepta_uso_informacion">Acepta el uso y manejo de la informacion</label><br>
                 <input type="checkbox" name="acepta_uso_informacion" id="acepta_uso_informacion" value="SI">
+                <input type="submit" class="btn btn-sm btn-success" value="Guardar">
             </form>
         </div>
     </section>
 
     <section class="datos_poblacionales">
         <div class="form">
-            <form action="">
-
-                <h1>Datos Poblacionales</h1>
+            <h1>Datos Poblacionales</h1>
+            <form action="index.php?controller=beneficiario&action=store" method="POST">
+                <input type="hidden" name="type_form" value="datos_poblacionales">
                 <div class="form-row">
                     <div class="col">
                         <label for="pertenencia_etnica">Pertenecia Étnica</label>
@@ -170,6 +185,7 @@
                         </select>
                     </div>
                 </div>
+                <input type="submit" value="Guardar" class="btn btn-sm btn-success">
             </form>
         </div>
     </section>
@@ -177,7 +193,8 @@
     <section class="estructura_familiar">
         <div class="form">
             <h1>Estructura Familiar</h1>
-            <form action="">
+            <form action="index.php?controller=beneficiario&action=store" method="POST">
+                <input type="hidden" name="type_form" value="datos_estructura_familiar">
                 <div class="form-row">
                     <div class="col">
                         <label for="">Nombre Completo</label>
@@ -195,14 +212,16 @@
                         <input type="number" class="form-control" name="edad_parentesco" placeholder="Edad">
                     </div>
                 </div>
+                <input type="submit" class="btn btn-sm btn-success" value="Guardar">
             </form>
         </div>
     </section>
 
     <section class="programas_sociales">
         <div class="form">
-            <form action="">
-                <h1>Programas Sociales</h1>
+            <h1>Programas Sociales</h1>
+            <form action="index.php?controller=beneficiario&action=store" method="POST">
+                <input type="hidden" name="type_form" value="datos_programas_sociales">
                 <div class="form-row">
                     <div class="col-3">
                         <label for="">¿Inscrito en otro programa social?</label>
@@ -223,7 +242,7 @@
         <div class="form-row">
             <div class="col-3">
                 <label for="">¿Algún tipo de subsidio?</label>
-                <select class="custom-select" name="iscrito_otro_programa_social" id="iscrito_otro_programa_social">
+                <select class="custom-select" name="inscrito_otro_programa_social" id="iscrito_otro_programa_social">
                     <option value="SI">Si</option>
                     <option value="NO">No</option>
                 </select>
@@ -236,6 +255,7 @@
                 <label for="">$ Ingresos recibidos</label>
                 <input class="form-control" type="text" name="ingresos_recibidos" placeholder="$ Ingresos recibidos">
             </div>
+            <input type="submit" class="btn btn-sm btn-success" value="Guardar">
             </form>
         </div>
     </section>
@@ -243,7 +263,8 @@
     <section class="educacion">
         <h1>Educación</h1>
         <div class="form">
-            <form action="">
+        <form action="index.php?controller=beneficiario&action=store" method="POST">
+                <input type="hidden" name="type_form" value="datos_educacion">
                 <div class="form-row">
                     <div class="col">
                         <label for="sabe_leer_escribir">¿Sabe leer y escribir?</label>
@@ -261,15 +282,15 @@
                 </div>
                 <div class="form-row">
                     <div class="col">
-                        <label for="estidia_actualmente">¿Estudia Actualmente?</label>
-                        <select class="custom-select" name="estidia_actualmente" id="estidia_actualmente">
+                        <label for="estudia_actualmente">¿Estudia Actualmente?</label>
+                        <select class="custom-select" name="estudia_actualmente" id="estudia_actualmente">
                             <option value="SI">Si</option>
                             <option value="NO">No</option>
                         </select>
                     </div>
                     <div class="col">
-                        <label for="estidia_actualmente">Grado que cursa actualmente</label>
-                        <select class="custom-select" name="estidia_actualmente" id="estidia_actualmente">
+                        <label for="grado_que_cursa">Grado que cursa actualmente</label>
+                        <select class="custom-select" name="grado_que_cursa" id="grado_que_cursa">
                             <option value="1">1°</option>
                             <option value="2">2°</option>
                             <option value="3">3°</option>
@@ -307,6 +328,7 @@
                         <input class="form-control" type="text" name="que_curso_realiza" placeholder="¿Cuál?">
                     </div>
                 </div>
+                <input type="submit" class="btn btn-sm btn-success" value="Guardar">
             </form>
         </div>
     </section>
@@ -314,7 +336,8 @@
     <section class="seguridad-social">
         <div class="form">
             <h1>Seguridad Social</h1>
-            <form action="">
+            <form action="index.php?controller=beneficiario&action=store" method="POST">
+                <input type="hidden" name="type_form" value="datos_seguridad_social">
                 <div class="form-row">
                     <div class="col">
                         <label for="">Nombre de la EPS</label>
@@ -348,28 +371,65 @@
                 </div>
                 <div class="form-row">
                     <div class="col">
-                        <label for="tipo_afiliacion">Regimen de Seguridad Social</label>
-                        <select class="custom-select" name="tipo_afiliacion" id="tipo_afiliacion">
+                        <label for="regimen_seguridad_social">Regimen de Seguridad Social</label>
+                        <select class="custom-select" name="regimen_seguridad_social" id="regimen_seguridad_social">
                             <option value="subsidiado">Subsidiado</option>
                             <option value="contributivo">contributivo</option>
                         </select>
                     </div>
                     <div class="col">
-                        <label for="tipo_afiliacion">Diversidad Funcional</label>
-                        <select class="custom-select" name="tipo_afiliacion" id="tipo_afiliacion">
+                        <label for="diversidad_funcional">Diversidad Funcional</label>
+                        <select class="custom-select" name="diversidad_funcional" id="diversidad_funcional">
                             <option value="subsidiado">Si</option>
                             <option value="contributivo">No</option>
                             <option value="MoreOptions">MoreOptiones</option>
                         </select>
                     </div>
                 </div>
+                <input type="submit" class="btn btn-sm btn-success" value="Guardar">
             </form>
         </div>
     </section>
     <section class="principal_proveedor">
         <div class="form">
+            <h1>Principal Proveedor Economico</h1>
+            <form action="index.php?controller=beneficiario&action=store" method="POST">
+                <input type="hidden" name="type_form" value="datos_proveedor_economico">
+                <div class="form-row">
+                    <div class="col">
+                        <label for="">Nombre</label>
+                        <input class="form-control" type="text" name="nombre" placeholder="Nombre Completo">
+                    </div>
+                    <div class="col">
+                    <label for="">Ocupacion</label>
+                        <input class="form-control" type="text" name="ocupacion" placeholder="Ocupacion">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                    <label for="">Lugar Donde Labora</label>
+                        <input class="form-control" type="text" name="lugar_labora" placeholder="Lugar donde labora">
+                    </div>
+                    <div class="col">
+                    <label for="">Ingresos SMLV</label>
+                        <input class="form-control" type="text" name="ingresos" placeholder="Ingresos">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                    <label for="">Egresos SMLV</label>
+                        <input class="form-control" type="text" name="egresos" placeholder="Egresos">
+                    </div>
+                </div>
+                <input type="submit" class="btn btn-sm btn-success" value="Guardar">
+            </form>
+        </div>
+    </section>
+    <section class="seguridad_alimenataria">
+        <div class="form">
             <h1>Seguridad Alimentaria</h1>
-            <form action="">
+            <form action="index.php?controller=beneficiario&action=store" method="POST">
+                <input type="hidden" name="type_form" value="datos_seguridad_alimentaria">
                 <div class="form-row">
                     <div class="col-8">
                         <label for="">¿De dónde obtiene el agua para el consumo y preparación de los alimentos</label>
@@ -457,12 +517,15 @@
                         </select>
                     </div>
                 </div>
+                <input type="submit" class="btn btn-sm btn-success" value="Guardar">
             </form>
         </div>
     </section>
     <section class="ubicacion-vivienda">
+        <h1>Ubicacion y condiciones de la vivienda</h1>
         <div class="form">
-            <form action="">
+        <form action="index.php?controller=beneficiario&action=store" method="POST">
+                <input type="hidden" name="type_form" value="datos_ubicacion_condiciones_vivienda">
                 <div class="form-row">
                     <div class="col">
                         <label for="">Zona</label>
@@ -569,7 +632,7 @@
                         </select>
                     </div>
                 </div>
-
+                <input type="submit" class="btn btn-sm btn-success" value="Guardar">
             </form>
         </div>
     </section>

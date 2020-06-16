@@ -1,0 +1,17 @@
+section input{
+
+   border-top: none!important;
+   border-left: none!important;
+   border-right: none!important;
+}
+section select{
+    border-top: none!important;
+    border-left: none!important;
+    border-right: none!important;
+}
+section{
+    display: none;
+}
+section{
+    transition: 1s ease-in-out;
+}
