@@ -9,12 +9,11 @@ require_once 'core/BaseController.php';
 # Se capturan el controlador y la acción que vienen por método GET
 $controller = isset($_GET["controller"]) ? $_GET["controller"] : "";
 $action = isset($_GET["action"]) ? $_GET["action"] : "";
-
 # Se evalua el controlador que llega por URL, en caso que no llegue nada, se toma el Controlador por defecto
 switch (ucwords($controller)) {
     # EN la medidad que se incluyan más controladores, se deben referenciar en un case
-    case '':
-        $controlador = '';
+    case 'Beneficiario':
+        $controlador = 'BeneficiarioController';
         break;
   
     default:

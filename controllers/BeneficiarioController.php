@@ -17,11 +17,13 @@ class BeneficiarioController extends BaseController
 {
     public function __construct()
     {
+        $this->layout = "app.php";
         parent::__construct();
     }
-    public function Index()
+    public function index()
     {
-        // Se retornaran todos los datos del modelo
+        $currentView = 'views\beneficiario\crear.php';
+        require_once 'views/layouts/' . $this->layout;        
     }
     public function create()
     {

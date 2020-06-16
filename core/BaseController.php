@@ -3,13 +3,11 @@
 session_start();
 class BaseController
 {
-    protected $layout = "admin_layout.php";
+    protected $layout = "app.php";
     public function __construct()
     {
         require_once 'Connection.php';
         require_once 'BaseModel.php';
-        require_once 'models/Paciente.class.php';
-        require_once 'models/Especialidad.class.php';
 
         if(isset($_SESSION['timeout'])){
             $tiempoSesion = time() - $_SESSION['timeout'];
