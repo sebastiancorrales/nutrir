@@ -1,5 +1,6 @@
+<link rel="stylesheet" href="css\form-benficiario.css">
 <div class="container-sm">
-<div class="progress">
+ <div class="progress">
             <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0"
                 aria-valuemax="2">
             </div>

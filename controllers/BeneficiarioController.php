@@ -35,12 +35,19 @@ class BeneficiarioController extends BaseController
         switch ($typeForm) {
             case 'datos_generales':
                 var_dump($_POST);
+
+                $primer_nombre = isset($_POST['primer_nombre']) ? $_POST['primer_nombre'] : "";
                 $segundo_nombre = isset($_POST['segundo_nombre']) ? $_POST['segundo_nombre'] : "";
                 $primer_apellido = isset($_POST['primer_apellido']) ? $_POST['primer_apellido'] : "";
                 $segundo_apellido = isset($_POST['segundo_apellido']) ? $_POST['segundo_apellido'] : "";
                 $tipo_documento = isset($_POST['tipo_documento']) ? $_POST['tipo_documento'] : "";
                 $numero_documento = isset($_POST['numero_documento']) ? $_POST['numero_documento'] : "";
                 $estado_civil = isset($_POST['estado_civil']) ? $_POST['estado_civil'] : "";
+                $beneficiario = new Beneficiario();
+                $beneficiario->informacionGeneral($primer_nombre, $segundo_nombre, $primer_apellido, $segundo_apellido,
+                    $tipo_documento, $numero_documento, $estado_civil
+                );
+                var_dump($beneficiario);
                 break;
             case 'datos_institucionales':
                 var_dump($_POST);
@@ -101,8 +108,8 @@ class BeneficiarioController extends BaseController
                 $puntaje_sisben = isset($_POST['puntaje_sisben']) ? $_POST['puntaje_sisben'] : "";
                 $regimen_seguridad_social = isset($_POST['regimen_seguridad_social']) ? $_POST['regimen_seguridad_social'] : "";
                 $diversidad_funcional = isset($_POST['diversidad_funcional']) ? $_POST['diversidad_funcional'] : "";
-            
-            break;
+
+                break;
             case 'datos_seguridad_alimentaria':
                 var_dump($_POST);
                 $obtencion_preparacion_alimentos = isset($_POST['obtencion_preparacion_alimentos']) ? $_POST['obtencion_preparacion_alimentos'] : "";
@@ -115,8 +122,8 @@ class BeneficiarioController extends BaseController
                 $carnes = isset($_POST['carnes']) ? $_POST['carnes'] : "";
                 $huevos = isset($_POST['huevos']) ? $_POST['huevos'] : "";
                 $quien_prepara_alimentos = isset($_POST['quien_prepara_alimentos']) ? $_POST['quien_prepara_alimentos'] : "";
-                
-            break;
+
+                break;
             case 'datos_proveedor_economico':
                 var_dump($_POST);
                 $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : "";
@@ -125,7 +132,7 @@ class BeneficiarioController extends BaseController
                 $ingresos = isset($_POST['ingresos']) ? $_POST['ingresos'] : "";
                 $egresos = isset($_POST['egresos']) ? $_POST['egresos'] : "";
 
-            break;
+                break;
             case 'datos_ubicacion_condiciones_vivienda':
                 var_dump($_POST);
                 $zona = isset($_POST['zona']) ? $_POST['zona'] : "";
@@ -142,7 +149,7 @@ class BeneficiarioController extends BaseController
                 $servicios_publicos = isset($_POST['servicios_publicos']) ? $_POST['servicios_publicos'] : "";
                 $cantidad_cuartos = isset($_POST['cantidad_cuartos']) ? $_POST['cantidad_cuartos'] : "";
                 $servicio_sanitario = isset($_POST['servicio_sanitario']) ? $_POST['servicio_sanitario'] : "";
-                
+
                 break;
             case 'datos_menor_cinco_anos':
                 break;

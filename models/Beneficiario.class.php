@@ -37,6 +37,21 @@ class Beneficiario extends BaseModel
         parent::__construct();
     }
 
+    public function informacionGeneral(
+        $primerNombre = null, $segundoNombre = null,
+        $primerApellido = null, $segundoApellido = null,
+        $tipoDocumento = null, $numeroDocumento = null, $estadoCivil = null
+    ) {
+        $this->estado = "activo";
+        $this->primerNombre = $primerNombre;
+        $this->segundoNombre = $segundoNombre;
+        $this->primerApellido = $primerApellido;
+        $this->segundoApellido = $segundoApellido;
+        $this->tipoDocumento = $tipoDocumento;
+        $this->numeroDocumento = $numeroDocumento;
+        $this->estadoCivil = $estadoCivil;
+    }
+
     /**
      * Get the value of estado
      */
@@ -499,7 +514,7 @@ class Beneficiario extends BaseModel
 
     /**
      * Get the value of fk_tipoPoblacion
-     */ 
+     */
     public function getFk_tipoPoblacion()
     {
         return $this->fk_tipoPoblacion;
@@ -509,7 +524,7 @@ class Beneficiario extends BaseModel
      * Set the value of fk_tipoPoblacion
      *
      * @return  self
-     */ 
+     */
     public function setFk_tipoPoblacion($fk_tipoPoblacion)
     {
         $this->fk_tipoPoblacion = $fk_tipoPoblacion;
@@ -519,7 +534,7 @@ class Beneficiario extends BaseModel
 
     /**
      * Get the value of fk_pertenenciaEtnica
-     */ 
+     */
     public function getFk_pertenenciaEtnica()
     {
         return $this->fk_pertenenciaEtnica;
@@ -529,7 +544,7 @@ class Beneficiario extends BaseModel
      * Set the value of fk_pertenenciaEtnica
      *
      * @return  self
-     */ 
+     */
     public function setFk_pertenenciaEtnica($fk_pertenenciaEtnica)
     {
         $this->fk_pertenenciaEtnica = $fk_pertenenciaEtnica;
@@ -539,7 +554,7 @@ class Beneficiario extends BaseModel
 
     /**
      * Get the value of fk_grupoEtario
-     */ 
+     */
     public function getFk_grupoEtario()
     {
         return $this->fk_grupoEtario;
@@ -549,7 +564,7 @@ class Beneficiario extends BaseModel
      * Set the value of fk_grupoEtario
      *
      * @return  self
-     */ 
+     */
     public function setFk_grupoEtario($fk_grupoEtario)
     {
         $this->fk_grupoEtario = $fk_grupoEtario;
