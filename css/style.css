@@ -1,0 +1,35 @@
+.options-dashboard {
+    position: fixed;
+}
+
+.module-items-row {
+    position    : relative;
+    margin-right: auto;
+    margin-left : auto;
+}
+
+.module-item {
+    background   : linear-gradient(45deg, #0799EF, #0073B7);
+    border-radius: 6px;
+    color        : #ffff;
+
+    width: 300px;
+}
+
+.module-title {
+    text-align : center;
+    font-size  : 40px;
+    font-weight: lighter;
+    font-style : normal;
+}
+
+.module-description {
+    margin-right: 20px;
+    margin-left : 20px;
+    text-align  : start;
+
+}
+
+.module-bg-triangle {
+    width: 295px !important;
+}

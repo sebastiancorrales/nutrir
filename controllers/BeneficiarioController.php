@@ -22,7 +22,7 @@ class BeneficiarioController extends BaseController
     }
     public function index()
     {
-        $currentView = 'views\beneficiario\crear.php';
+        $currentView = 'views\beneficiario\index.php';
         require_once 'views/layouts/' . $this->layout;
     }
     public function create()
