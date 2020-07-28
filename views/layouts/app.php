@@ -31,7 +31,7 @@
 
     </nav>
 
-    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <aside class="main-sidebar aside-dashboard elevation-4">
       <div class="options-dashboard">
         <a href="index.php" class="nav-link">
           <h1 class="text-white">Nutrir</h1>
@@ -85,7 +85,7 @@
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-newspaper"></i>
+                  <i class="nav-icon fas fa-newspaper"></i>
 
                   <p>
                     Novedades
@@ -101,6 +101,20 @@
                     <i class="right"></i>
                   </p>
                 </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="dropdown dropright nav-link btn-panel-admin dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="nav-icon fas fa-columns "></i>
+                  <p>
+                    Panel administrativo
+                  </p>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Programas</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                  </div>
+                </a>
+
               </li>
             </ul>
           </nav>

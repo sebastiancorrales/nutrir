@@ -1,6 +1,9 @@
 .options-dashboard {
     position: fixed;
 }
+.aside-dashboard{
+    background-color: #2C364C;
+}
 
 .module-items-row {
     position    : relative;
@@ -32,4 +35,9 @@
 
 .module-bg-triangle {
     width: 295px !important;
+}
+
+a.btn-panel-admin{
+    border: none;
+
 }
