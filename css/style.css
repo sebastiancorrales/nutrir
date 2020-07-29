@@ -4,7 +4,9 @@
 .aside-dashboard{
     background-color: #2C364C;
 }
-
+.title-module{
+    color: #2c364c!important;
+}
 .module-items-row {
     position    : relative;
     margin-right: auto;

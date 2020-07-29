@@ -109,9 +109,17 @@
                     Panel administrativo
                   </p>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Unidades de servicio</a>
                     <a class="dropdown-item" href="#">Programas</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
+                    <a class="dropdown-item" href="#">Convenios</a>
+                    <a class="dropdown-item" href="#">Tipo de población</a>
+                    <a class="dropdown-item" href="#">Pertenencia etnica</a>
+                    <a class="dropdown-item" href="index.php?controller=GrupoEtario&action=">Grupo Etario</a> 
+                    <a class="dropdown-item" href="#">Programas sociales</a>
+                    <a class="dropdown-item" href="#">Seguridad sociale</a>
+                    <a class="dropdown-item" href="#">Regimen de seguiridad social</a>
+                    <a class="dropdown-item" href="#">Diversidad funcional</a>
+                    <a class="dropdown-item" href="#">Vacunas</a>
                   </div>
                 </a>
 
