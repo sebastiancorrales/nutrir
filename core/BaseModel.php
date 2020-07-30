@@ -11,7 +11,7 @@ class BaseModel extends Connection
         parent::__construct();
     }
 
-    public function getAll()
+    public function all()
     {
         try {
             // FETCH_OBJ

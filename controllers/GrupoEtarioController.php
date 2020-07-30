@@ -22,6 +22,8 @@ class GrupoEtarioController extends BaseController
     }
     public function index()
     {
+        $grupo_etario = new GrupoEtario();
+        $grupos = $grupo_etario->all();
         $currentView = 'views/administration-panel/grupo-etario/index.php';
         require_once 'views/layouts/' . $this->layout;
     }

@@ -108,7 +108,7 @@
                   <p>
                     Panel administrativo
                   </p>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <div class="dropdown-menu dropdown-background" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" href="#">Unidades de servicio</a>
                     <a class="dropdown-item" href="#">Programas</a>
                     <a class="dropdown-item" href="#">Convenios</a>

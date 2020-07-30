@@ -8,8 +8,11 @@ class GrupoEtario extends BaseModel
 
     public function __construct()
     {
+        $this->table = 'grupo_etario';
         parent::__construct();
     }
+
+
 
     /**
      * Get the value of nombre

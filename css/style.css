@@ -1,12 +1,20 @@
 .options-dashboard {
     position: fixed;
 }
-.aside-dashboard{
+
+.aside-dashboard {
     background-color: #2C364C;
 }
-.title-module{
-    color: #2c364c!important;
+
+.dropdown-background {
+    background-color: #2C364C;
+
 }
+
+.title-module {
+    color: #2c364c !important;
+}
+
 .module-items-row {
     position    : relative;
     margin-right: auto;
@@ -39,7 +47,7 @@
     width: 295px !important;
 }
 
-a.btn-panel-admin{
+a.btn-panel-admin {
     border: none;
 
 }

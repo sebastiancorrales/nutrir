@@ -13,18 +13,25 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th>1053872211</th>
-                        <td>Dilan Andres Castaño Dominguez</td>
-                        <td>14</td>
-                        <td>Comedores</td>
+                    <?php
+                    foreach ($grupos as $grupo) {
 
-                        <td>
-                            <a href="">Editar</a>
-                            <a href="">Detalle</a>
-                            <a href="">Eliminar</a>
-                        </td>
-                    </tr>
+                    ?>
+                        <tr>
+                            <th><?php echo $grupo->id ?></th>
+                            <td><?php echo strtoupper($grupo->nombre) ?></td>
+                            <td><?php echo strtolower($grupo->descripcion)  ?></td>
+
+                            <td>
+                                <a href="">Editar</a>
+                                <a href="">Detalle</a>
+                                <a href="">Eliminar</a>
+                            </td>
+                        </tr>
+                    <?php
+                    }
+
+                    ?>
                 </tbody>
             </table>
         </div>
