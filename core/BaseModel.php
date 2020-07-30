@@ -15,8 +15,8 @@ class BaseModel extends Connection
     {
         try {
             // FETCH_OBJ
-            $sql = $this->dbConnection->prepare("SELECT * FROM ".$this->table);
-            
+            $sql = $this->dbConnection->prepare("SELECT * FROM " . $this->table);
+
             // Ejecutamos
             $sql->execute();
             $resultSet = null;
@@ -30,11 +30,31 @@ class BaseModel extends Connection
             die();
         }
     }
-    /*
-    * Aqui podemos incluir los demás métodos que nos ayuden
-    * a hacer operaciones con la base de datos de forma común
-    */
+    public function delete($id)
+    {
+        try {
+            $sql = $this->dbConnection->prepare("DELETE FROM $this->table WHERE id = :id");
+            $sql->bindParam(':id', $id);
+            $sql->execute();
+            return true;
+        } catch (PDOException $ex) {
+            echo $ex->getMessage();
+            die();
+        }
+    }
+    public function get($id){
+        try {
+            $sql = $this->dbConnection->prepare("SELECT * FROM $this->table WHERE id = :id");
+            $sql->bindParam(':id', $id);
+            $sql->execute();
+            $resultSet = null;
+            while ($row = $sql->fetch(PDO::FETCH_OBJ)) {
+                $resultSet[] = $row;
+            }
+            return $resultSet[0];
+        } catch (PDOException $ex) {
+            echo $ex->getMessage();
+            die();
+        }
+    }
 }
-
-
-?>

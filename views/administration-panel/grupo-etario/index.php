@@ -3,6 +3,10 @@
         <div class="module-items-row">
 
             <h1 class="title-module">Grupo Etario</h1>
+            <button type="button" class="btn btn-create mt-2 mb-2" data-toggle="modal" data-target="#staticBackdrop">
+                <i class="fas fa-plus"></i>
+                Crear nuevo grupo etario
+            </button>
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -23,9 +27,9 @@
                             <td><?php echo strtolower($grupo->descripcion)  ?></td>
 
                             <td>
-                                <a href="">Editar</a>
-                                <a href="">Detalle</a>
-                                <a href="">Eliminar</a>
+                                <a href="index.php?controller=GrupoEtario&action=edit&id=<?php echo $grupo->id ?>" class="btn-options">Editar </a>
+                                <a href="index.php?controller=GrupoEtario&action=show&id=<?php echo $grupo->id ?>" class="btn-options">Detalle </a>
+                                <a href="index.php?controller=GrupoEtario&action=destroy&id=<?php echo $grupo->id ?>" class="btn-options">Eliminar</a>
                             </td>
                         </tr>
                     <?php
@@ -37,3 +41,6 @@
         </div>
     </div>
 </div>
+<?php
+require_once 'create.php';
+?>
