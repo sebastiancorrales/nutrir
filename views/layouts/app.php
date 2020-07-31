@@ -110,11 +110,11 @@
                   </p>
                   <div class="dropdown-menu dropdown-background" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" href="#">Unidades de servicio</a>
-                    <a class="dropdown-item" href="#">Programas</a>
+                    <a class="dropdown-item" href="index.php?controller=Programas&action=index">Programas</a>
                     <a class="dropdown-item" href="#">Convenios</a>
                     <a class="dropdown-item" href="#">Tipo de población</a>
                     <a class="dropdown-item" href="#">Pertenencia etnica</a>
-                    <a class="dropdown-item" href="index.php?controller=GrupoEtario&action=">Grupo Etario</a> 
+                    <a class="dropdown-item" href="index.php?controller=GrupoEtario&action=index">Grupo Etario</a> 
                     <a class="dropdown-item" href="#">Programas sociales</a>
                     <a class="dropdown-item" href="#">Seguridad sociale</a>
                     <a class="dropdown-item" href="#">Regimen de seguiridad social</a>

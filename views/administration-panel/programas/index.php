@@ -2,12 +2,13 @@
     <div class="row">
         <div class="col">
             <div class="module-items-row">
-
-                <h1 class="title-module">Grupo Etario</h1>
+                <br>
+                <h1 class="title-module">Programas</h1>
                 <button type="button" class="btn btn-create mt-2 mb-2" data-toggle="modal" data-target="#staticBackdrop">
                     <i class="fas fa-plus"></i>
-                    Crear nuevo grupo etario
+                    Crear nuevo Programa    
                 </button>
+                <br><br>
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -19,17 +20,17 @@
                     </thead>
                     <tbody>
                         <?php
-                            foreach ($grupos as $grupo) {
+                            foreach ($programas as $programa) {
                         ?>
                             <tr>
-                                <th><?php echo $grupo->id ?></th>
-                                <td><?php echo strtoupper($grupo->nombre) ?></td>
-                                <td><?php echo strtolower($grupo->descripcion)  ?></td>
+                                <th scope="col"><?php echo $programa->id ?></th>
+                                <td scope="col"><?php echo strtoupper($programa->nombre) ?></td>
+                                <td scope="col"><?php echo strtolower($programa->descripcion)  ?></td>
 
                                 <td>
-                                    <a href="index.php?controller=GrupoEtario&action=edit&id=<?php echo $grupo->id ?>" class="btn-options">Editar </a>
-                                    <a href="index.php?controller=GrupoEtario&action=show&id=<?php echo $grupo->id ?>" class="btn-options">Detalle </a>
-                                    <a href="index.php?controller=GrupoEtario&action=destroy&id=<?php echo $grupo->id ?>" class="btn-options">Eliminar</a>
+                                    <a href="index.php?controller=Programas&action=edit&id=<?php echo $programa->id ?>" class="btn-options">Editar </a>
+                                    <a href="index.php?controller=Programas&action=show&id=<?php echo $programa->id ?>" class="btn-options">Detalle </a>
+                                    <a href="index.php?controller=Programas&action=destroy&id=<?php echo $programa->id ?>" class="btn-options">Eliminar</a>
                                 </td>
                             </tr>
                         <?php

@@ -1,5 +1,6 @@
 <?php
 include_once 'core\BaseController.php';
+include_once 'models\Programa.class.php';
 include_once 'models\Beneficiario.class.php';
 include_once 'models\InformacionInstitucional.class.php';
 include_once 'models\TipoPoblacion.class.php';
@@ -13,44 +14,46 @@ include_once 'models\ProveedorEconomico.class.php';
 include_once 'models\SeguridadAlimentaria.class.php';
 include_once 'models\UbicacionVivienda.class.php';
 
-class GrupoEtarioController extends BaseController
+class ProgramasController extends BaseController
 {
     public function __construct()
     {
         $this->layout = "app.php";
         parent::__construct();
     }
+
     public function index()
     {
-        $grupo_etario = new GrupoEtario();
-        $grupos = $grupo_etario->all();
-        $currentView = 'views/administration-panel/grupo-etario/index.php';
+        $programa = new Programa();
+        $programas = $programa->all();
+        $currentView = 'views/administration-panel/programas/index.php';
         require_once 'views/layouts/' . $this->layout;
     }
     public function create()
     {
-        // Retorna la vista de del formulario
+        //Devuelve la vista de crear
     }
+
     public function store()
     {
-
         if ($_POST['nombre']) {
             $nombre = isset($_POST['nombre']) ? strtolower($_POST['nombre']) : false;
             $descripcion = isset($_POST['descripcion']) ? strtolower($_POST['descripcion']) : null;
-            $grupo_etario = new GrupoEtario($nombre, $descripcion);
-            $grupo_etario->save();
-            header('Location: index.php?controller=GrupoEtario&action=index');
+            $programa = new Programa($nombre, $descripcion);
+            $programa->save();
+            header('Location: index.php?controller=Programas&action=index');
         } else {
             return "request invalid";
         }
     }
+
     public function show()
     {
         if ($_GET['id']) {
             $id = ($_GET['id']);
-            $grupo_etario = new GrupoEtario();
-            $grupo = $grupo_etario->get($id);
-            $currentView = 'views/administration-panel/grupo-etario/detail.php';
+            $programa = new Programa();
+            $programas = $programa->get($id);
+            $currentView = 'views/administration-panel/programas/detail.php';
             require_once 'views/layouts/' . $this->layout;
         }
     }
@@ -58,9 +61,9 @@ class GrupoEtarioController extends BaseController
     {
         if ($_GET['id']) {
             $id = ($_GET['id']);
-            $grupo_etario = new GrupoEtario();
-            $grupo = $grupo_etario->get($id);
-            $currentView = 'views/administration-panel/grupo-etario/edit.php';
+            $programa = new Programa();
+            $programas = $programa->get($id);
+            $currentView = 'views/administration-panel/programas/edit.php';
             require_once 'views/layouts/' . $this->layout;
         }
     }
@@ -70,9 +73,9 @@ class GrupoEtarioController extends BaseController
             $id = $_GET['id'];
             $nombre = isset($_POST['nombre']) ? strtolower($_POST['nombre']) : false;
             $descripcion = isset($_POST['descripcion']) ? strtolower($_POST['descripcion']) : null;
-            $grupo_etario = new GrupoEtario($nombre, $descripcion);
-            $grupo_etario->update($id);
-            header('Location: index.php?controller=GrupoEtario&action=');
+            $programas = new Programa($nombre, $descripcion);
+            $programas->update($id);
+            header('Location: index.php?controller=Programas&action=index');
         } else {
             return "request invalid";
         }
@@ -81,9 +84,10 @@ class GrupoEtarioController extends BaseController
     {
         if ($_GET['id']) {
             $id = ($_GET['id']);
-            $grupo_etario = new GrupoEtario();
-            $grupo_etario->delete($id);
-            header('Location: index.php?controller=GrupoEtario&action=');
+            $programas = new Programa();
+            $programas->delete($id);
+            header('Location: index.php?controller=Programas&action=index');
         }
     }
+
 }

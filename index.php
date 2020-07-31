@@ -25,6 +25,9 @@ switch (ucwords($controller)) {
     case 'GrupoEtario':
         $controlador = 'GrupoEtarioController';
         break;
+    case 'Programas':
+       $controlador = 'ProgramasController';
+    break;
     default:
         $controlador = CONTROLADOR_DEFECTO;
         break;
