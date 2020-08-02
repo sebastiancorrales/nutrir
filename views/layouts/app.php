@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
@@ -114,7 +114,7 @@
                     <a class="dropdown-item" href="#">Convenios</a>
                     <a class="dropdown-item" href="#">Tipo de población</a>
                     <a class="dropdown-item" href="#">Pertenencia etnica</a>
-                    <a class="dropdown-item" href="index.php?controller=GrupoEtario&action=index">Grupo Etario</a> 
+                    <a class="dropdown-item" href="index.php?controller=GrupoEtario&action=index">Grupo Etario</a>
                     <a class="dropdown-item" href="#">Programas sociales</a>
                     <a class="dropdown-item" href="#">Seguridad sociale</a>
                     <a class="dropdown-item" href="#">Regimen de seguiridad social</a>

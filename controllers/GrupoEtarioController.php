@@ -20,6 +20,30 @@ class GrupoEtarioController extends BaseController
         $this->layout = "app.php";
         parent::__construct();
     }
+
+
+    public function get()
+    {
+
+
+
+        $errors = array(
+            "get" => false,
+            "message" => "Error en la peticion AJAX",
+        );
+
+        $grupoEtario = new GrupoEtario();
+        $grupo = $grupoEtario->all();
+        if ($grupo) {
+            $errors['get'] = true;
+            $errors['message'] = "datos obtenidos con exito";
+        } else {
+            $errors['get'] = true;
+            $errors['message'] = "Error al traer los datos";
+        }
+        header('Content-type: application/json; charset=utf-8');
+        echo json_encode($grupo);
+    }
     public function index()
     {
         $grupo_etario = new GrupoEtario();
