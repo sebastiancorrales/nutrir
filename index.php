@@ -15,19 +15,24 @@ $action = isset($_GET["action"]) ? $_GET["action"] : "";
 # Se evalua el controlador que llega por URL, en caso que no llegue nada, se toma el Controlador por defecto
 switch (ucwords($controller)) {
         # EN la medidad que se incluyan más controladores, se deben referenciar en un case
-    case 'Beneficiario':
-        $controlador = 'BeneficiarioController';
-        break;
     case 'Home':
         $controlador = 'HomeController';
         break;
-
+    case 'Beneficiario':
+        $controlador = 'BeneficiarioController';
+        break;
+    case 'TipoPoblacion':
+        $controlador = 'TipoPoblacionController';
+        break;
+    case 'PertenenciaEtnica':
+        $controlador = 'PertenenciaEtnicaController';
+        break;
     case 'GrupoEtario':
         $controlador = 'GrupoEtarioController';
         break;
     case 'Programas':
-       $controlador = 'ProgramasController';
-    break;
+        $controlador = 'ProgramasController';
+        break;
     default:
         $controlador = CONTROLADOR_DEFECTO;
         break;
