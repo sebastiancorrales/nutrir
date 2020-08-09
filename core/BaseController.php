@@ -8,7 +8,7 @@ class BaseController
     {
         require_once 'Connection.php';
         require_once 'BaseModel.php';
-
+        date_default_timezone_set('America/Bogota');
         if(isset($_SESSION['timeout'])){
             $tiempoSesion = time() - $_SESSION['timeout'];
             if($tiempoSesion > (TIEMPO_INACTIVIDAD * 60)){

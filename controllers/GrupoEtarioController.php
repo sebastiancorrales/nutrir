@@ -24,9 +24,6 @@ class GrupoEtarioController extends BaseController
 
     public function get()
     {
-
-
-
         $errors = array(
             "get" => false,
             "message" => "Error en la peticion AJAX",

@@ -12,7 +12,9 @@ class Beneficiario extends BaseModel
     private $numeroDocumento;
     private $fechaNacimiento;
     private $genero;
-    private $parentescoOtroFamiliar;
+    private $lugarNacimiento;
+    private $paisNacimiento;
+    private $parentescoConOtroFamiliar;
     private $estadoCivil;
     private $esPoblacionDesplazada;
     private $esVictimaOtroTipoViolencia;
@@ -34,13 +36,19 @@ class Beneficiario extends BaseModel
 
     public function __construct()
     {
+        $this->table = 'beneficiarios';
         parent::__construct();
     }
 
     public function informacionGeneral(
-        $primerNombre = null, $segundoNombre = null,
-        $primerApellido = null, $segundoApellido = null,
-        $tipoDocumento = null, $numeroDocumento = null, $estadoCivil = null
+        $primerNombre = null,
+        $segundoNombre = null,
+        $primerApellido = null,
+        $segundoApellido = null,
+        $tipoDocumento = null,
+        $numeroDocumento = null,
+        $estadoCivil = null,
+        $fechaInscripcion = null
     ) {
         $this->estado = "activo";
         $this->primerNombre = $primerNombre;
@@ -50,7 +58,156 @@ class Beneficiario extends BaseModel
         $this->tipoDocumento = $tipoDocumento;
         $this->numeroDocumento = $numeroDocumento;
         $this->estadoCivil = $estadoCivil;
+        $this->fechaInscripcion = $fechaInscripcion;
     }
+    public function informacionInstitucional(
+        $numeroDocumento,
+        $paisNacimiento,
+        $lugarNacimiento,
+        $fechaNacimiento,
+        $nacimientoTermino,
+        $mesesNacimiento,
+        $parentescoConOtroFamiliar,
+        $tipologiaFamiliar,
+        $esPoblacionDesplazada,
+        $esVictimaOtroTipoViolencia,
+        $cualViolencia,
+        $pesoIngreso,
+        $tallaIngreso,
+        $estadoNutricionalIngreso,
+        $autorizaManejoInfo
+    ) {
+        $this->numeroDocumento = $numeroDocumento;
+        $this->paisNacimiento = $paisNacimiento;
+        $this->lugarNacimiento = $lugarNacimiento;
+        $this->fechaNacimiento = $fechaNacimiento;
+        $this->nacimientoTermino = $nacimientoTermino;
+        $this->mesesNacimiento = $mesesNacimiento;
+        $this->parentescoConOtroFamiliar = $parentescoConOtroFamiliar;
+        $this->tipologiaFamiliar = $tipologiaFamiliar;
+        $this->esPoblacionDesplazada = $esPoblacionDesplazada;
+        $this->esVictimaOtroTipoViolencia = $esVictimaOtroTipoViolencia;
+        $this->cualViolencia = $cualViolencia;
+        $this->pesoIngreso = $pesoIngreso;
+        $this->tallaIngreso = $tallaIngreso;
+        $this->estadoNutricionalIngreso = $estadoNutricionalIngreso;
+        $this->autorizaManejoInfo = $autorizaManejoInfo;
+    }
+    public function saveInformacionInstitucional()
+    {
+        try {
+            $numeroDocumento = $this->getNumeroDocumento();
+            $paisNacimiento = $this->getPaisNacimiento();
+            $lugarNacimiento = $this->getLugarNacimiento();
+            $fechaNacimiento = $this->getFechaNacimiento();
+            $nacimientoTermino = $this->getNacimientoTermino();
+            $mesesNacimiento = $this->getMesesNacimiento();
+            $parentescoConOtroFamiliar = $this->getParentescoConOtroFamiliar();
+            $tipologiaFamiliar = $this->getTipologiaFamiliar();
+            $esPoblacionDesplazada = $this->getEsPoblacionDesplazada();
+            $esVictimaOtroTipoViolencia = $this->getEsVictimaOtroTipoViolencia();
+            $cualViolencia = $this->getCualViolencia();
+            $pesoIngreso = $this->getPesoIngreso();
+            $tallaIngreso = $this->getTallaIngreso();
+            $estadoNutricionalIngreso = $this->getEstadoNutricionalIngreso();
+            $autorizaManejoInfo = $this->getAutorizaManejoInfo();
+
+
+            $sql = $this->dbConnection->prepare(
+                'UPDATE beneficiarios
+                SET
+                pais_nacimiento = :pais_nacimiento,
+                lugar_nacimiento = :lugar_nacimiento,
+                fecha_nacimiento = :fecha_nacimiento,
+                nacimiento_termino = :nacimiento_termino,
+                cantidad_meses_nacimiento = :cantidad_meses_nacimiento,
+                parentesco_otro_familiar = :parentesco_otro_familiar, 
+                tipologia_familiar = :tipologia_familiar,
+                poblacion_desplazada = :poblacion_desplazada,
+                victima_otro_tipo_violencia = :victima_otro_tipo_violencia,
+                cual_violencia = :cual_violencia,
+                peso_ingreso = :peso_ingreso,
+                talla_ingreso = :talla_ingreso,
+                estado_nutricional_ingreso = :estado_nutricional_ingreso,
+                autoriza_manejo_informacion = :autoriza_manejo_informacion
+                WHERE numero_documento = :numero_documento'
+            );
+
+            $sql->bindParam(':pais_nacimiento', $paisNacimiento);
+            $sql->bindParam(':lugar_nacimiento', $lugarNacimiento);
+            $sql->bindParam(':fecha_nacimiento', $fechaNacimiento);
+            $sql->bindParam(':nacimiento_termino', $nacimientoTermino);
+            $sql->bindParam(':cantidad_meses_nacimiento', $mesesNacimiento);
+            $sql->bindParam(':parentesco_otro_familiar', $parentescoConOtroFamiliar);
+            $sql->bindParam(':tipologia_familiar', $tipologiaFamiliar);
+            $sql->bindParam(':poblacion_desplazada', $esPoblacionDesplazada);
+            $sql->bindParam(':victima_otro_tipo_violencia', $esVictimaOtroTipoViolencia);
+            $sql->bindParam(':cual_violencia', $cualViolencia);
+            $sql->bindParam(':peso_ingreso', $pesoIngreso);
+            $sql->bindParam(':talla_ingreso', $tallaIngreso);
+            $sql->bindParam(':estado_nutricional_ingreso', $estadoNutricionalIngreso);
+            $sql->bindParam(':autoriza_manejo_informacion', $autorizaManejoInfo);
+            $sql->bindParam(':numero_documento', $numeroDocumento);
+
+            $sql->execute();
+        } catch (Error $e) {
+            echo $e;
+        }
+    }
+
+    public function saveInformacionGeneral()
+    {
+        try {
+            $estado = $this->getEstado();
+            $primerNombre = $this->getPrimerNombre();
+            $segundoNombre = $this->getSegundoNombre();
+            $primerApellido = $this->getPrimerApellido();
+            $segundoApellido = $this->getSegundoApellido();
+            $tipoDocumento = $this->getTipoDocumento();
+            $numeroDocumento = $this->getNumeroDocumento();
+            $estadoCivil = $this->getEstadoCivil();
+            $fechaInscripcion = $this->getFechaInscripcion();
+
+            $sql = $this->dbConnection->prepare(
+                'INSERT INTO beneficiarios (
+                estado,
+                primer_nombre,
+                segundo_nombre,
+                primer_apellido,
+                segundo_apellido,
+                tipo_documento,
+                numero_documento,
+                estado_civil,
+                fecha_inscripcion
+                ) 
+                VALUES (
+                :estado,
+                :primer_nombre, 
+                :segundo_nombre,
+                :primer_apellido,
+                :segundo_apellido,
+                :tipo_documento,
+                :numero_documento,
+                :estado_civil,
+                :fecha_inscripcion
+                )'
+            );
+            $sql->bindParam(':estado', $estado);
+            $sql->bindParam(':primer_nombre', $primerNombre);
+            $sql->bindParam(':segundo_nombre', $segundoNombre);
+            $sql->bindParam(':primer_apellido', $primerApellido);
+            $sql->bindParam(':segundo_apellido', $segundoApellido);
+            $sql->bindParam(':tipo_documento', $tipoDocumento);
+            $sql->bindParam(':numero_documento', $numeroDocumento);
+            $sql->bindParam(':estado_civil', $estadoCivil);
+            $sql->bindParam(':fecha_inscripcion', $fechaInscripcion);
+            $sql->execute();
+        } catch (Error $e) {
+            echo $e;
+        }
+    }
+
+
 
     /**
      * Get the value of estado
@@ -233,21 +390,21 @@ class Beneficiario extends BaseModel
     }
 
     /**
-     * Get the value of parentescoOtroFamiliar
+     * Get the value of parentescoConOtroFamiliar
      */
-    public function getParentescoOtroFamiliar()
+    public function getParentescoConOtroFamiliar()
     {
-        return $this->parentescoOtroFamiliar;
+        return $this->parentescoConOtroFamiliar;
     }
 
     /**
-     * Set the value of parentescoOtroFamiliar
+     * Set the value of parentescoConOtroFamiliar
      *
      * @return  self
      */
-    public function setParentescoOtroFamiliar($parentescoOtroFamiliar)
+    public function setParentescoConOtroFamiliar($parentescoConOtroFamiliar)
     {
-        $this->parentescoOtroFamiliar = $parentescoOtroFamiliar;
+        $this->parentescoConOtroFamiliar = $parentescoConOtroFamiliar;
 
         return $this;
     }
@@ -568,6 +725,46 @@ class Beneficiario extends BaseModel
     public function setFk_grupoEtario($fk_grupoEtario)
     {
         $this->fk_grupoEtario = $fk_grupoEtario;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of lugarNa$lugarNacimiento
+     */
+    public function getLugarNacimiento()
+    {
+        return $this->lugarNacimiento;
+    }
+
+    /**
+     * Set the value of lugarNa$lugarNacimiento
+     *
+     * @return  self
+     */
+    public function setLugarNacimiento($lugarNacimiento)
+    {
+        $this->lugarNacimiento = $lugarNacimiento;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of paisNacimiento
+     */
+    public function getPaisNacimiento()
+    {
+        return $this->paisNacimiento;
+    }
+
+    /**
+     * Set the value of paisNacimiento
+     *
+     * @return  self
+     */
+    public function setPaisNacimiento($paisNacimiento)
+    {
+        $this->paisNacimiento = $paisNacimiento;
 
         return $this;
     }

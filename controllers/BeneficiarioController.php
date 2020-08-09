@@ -22,11 +22,28 @@ class BeneficiarioController extends BaseController
     }
     public function index()
     {
+        $beneficiario = new Beneficiario();
+        $beneficiarios = $beneficiario->all();
         $currentView = 'views\beneficiario\index.php';
         require_once 'views/layouts/' . $this->layout;
     }
     public function create()
     {
+        $typeForm = isset($_GET['type_form']) ? $_GET['type_form'] : '';
+        $documento = isset($_GET['id']) ? $_GET['id'] : '';
+
+
+        switch ($typeForm) {
+            case 'datos_institucionales':
+                $currentView = 'views\beneficiario\forms\datos_institucionales.php';
+                require_once 'views/layouts/' . $this->layout;
+                break;
+            default:
+                $currentView = 'views\beneficiario\create.php';
+                require_once 'views/layouts/' . $this->layout;
+                break;
+        }
+
         // Retorna la vista de del formulario
     }
     public function store()
@@ -35,7 +52,6 @@ class BeneficiarioController extends BaseController
         switch ($typeForm) {
             case 'datos_generales':
                 var_dump($_POST);
-
                 $primer_nombre = isset($_POST['primer_nombre']) ? $_POST['primer_nombre'] : "";
                 $segundo_nombre = isset($_POST['segundo_nombre']) ? $_POST['segundo_nombre'] : "";
                 $primer_apellido = isset($_POST['primer_apellido']) ? $_POST['primer_apellido'] : "";
@@ -44,27 +60,61 @@ class BeneficiarioController extends BaseController
                 $numero_documento = isset($_POST['numero_documento']) ? $_POST['numero_documento'] : "";
                 $estado_civil = isset($_POST['estado_civil']) ? $_POST['estado_civil'] : "";
                 $beneficiario = new Beneficiario();
-                $beneficiario->informacionGeneral($primer_nombre, $segundo_nombre, $primer_apellido, $segundo_apellido,
-                    $tipo_documento, $numero_documento, $estado_civil
+                $fecha_inscripcion = date('Y-m-d');
+                $beneficiario->informacionGeneral(
+                    $primer_nombre,
+                    $segundo_nombre,
+                    $primer_apellido,
+                    $segundo_apellido,
+                    $tipo_documento,
+                    $numero_documento,
+                    $estado_civil,
+                    $fecha_inscripcion
                 );
-                var_dump($beneficiario);
+                // Guarda la informacion general en la base de datos
+                $beneficiario->saveInformacionGeneral();
+                header('Location: index.php?controller=Beneficiario&action=create&id=' . $numero_documento . '&type_form=datos_institucionales');
+
                 break;
             case 'datos_institucionales':
-                var_dump($_POST);
+                print_r($_POST);
+                $documento = isset($_POST['documento'])?$_POST['documento']:'';
                 $pais_nacimiento = isset($_POST['pais_nacimiento']) ? $_POST['pais_nacimiento'] : "";
                 $lugar_nacimiento = isset($_POST['lugar_nacimiento']) ? $_POST['lugar_nacimiento'] : "";
                 $fecha_nacimiento = isset($_POST['fecha_nacimiento']) ? $_POST['fecha_nacimiento'] : "";
                 $nacimiento_termino = isset($_POST['nacimiento_termino']) ? $_POST['nacimiento_termino'] : "";
                 $cantidad_meses = isset($_POST['cantidad_meses']) ? $_POST['cantidad_meses'] : "";
                 $parentesco_familiar = isset($_POST['parentesco_familiar']) ? $_POST['parentesco_familiar'] : "";
-                $cual_parentesco = isset($_POST['cual_parentesco']) ? $_POST['cual_parentesco'] : "";
                 $tipologia_familiar = isset($_POST['tipologia_familiar']) ? $_POST['tipologia_familiar'] : "";
                 $poblacion_desplazada = isset($_POST['poblacion_desplazada']) ? $_POST['poblacion_desplazada'] : "";
                 $victima_otro_tipo_violencia = isset($_POST['victima_otro_tipo_violencia']) ? $_POST['victima_otro_tipo_violencia'] : "";
+                $cual_violencia = isset($_POST['cual_violencia']) ? $_POST['cual_violencia'] : "";
                 $peso_ingreso = isset($_POST['peso_ingreso']) ? $_POST['peso_ingreso'] : "";
                 $talla_ingreso = isset($_POST['talla_ingreso']) ? $_POST['talla_ingreso'] : "";
                 $estado_nutricional = isset($_POST['estado_nutricional']) ? $_POST['estado_nutricional'] : "";
                 $acepta_uso_informacion = isset($_POST['acepta_uso_informacion']) ? $_POST['acepta_uso_informacion'] : "";
+
+                $beneficiario = new Beneficiario();
+                $beneficiario->informacionInstitucional(
+                    $documento,
+                    $pais_nacimiento,
+                    $lugar_nacimiento,
+                    $fecha_nacimiento,
+                    $nacimiento_termino,
+                    $cantidad_meses,
+                    $parentesco_familiar,
+                    $tipologia_familiar,
+                    $poblacion_desplazada,
+                    $victima_otro_tipo_violencia,
+                    $cual_violencia,
+                    $peso_ingreso,
+                    $talla_ingreso,
+                    $estado_nutricional,
+                    $acepta_uso_informacion
+                );
+                $beneficiario->saveInformacionInstitucional();
+                header('Location: index.php?controller=Beneficiario&action=');
+                
                 break;
             case 'datos_poblacionales':
                 var_dump($_POST);
