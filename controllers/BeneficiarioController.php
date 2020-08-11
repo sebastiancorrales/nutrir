@@ -38,12 +38,43 @@ class BeneficiarioController extends BaseController
                 $currentView = 'views\beneficiario\forms\datos_institucionales.php';
                 require_once 'views/layouts/' . $this->layout;
                 break;
+            case 'datos_poblacionales':
+                $currentView = 'views\beneficiario\forms\datos_poblacionales.php';
+                require_once 'views/layouts/' . $this->layout;
+                break;
+            case 'estructura_familiar':
+                $currentView = 'views\beneficiario\forms\estructura_familiar.php';
+                require_once 'views/layouts/' . $this->layout;
+                break;
+            case 'programas_sociales':
+                $currentView = 'views\beneficiario\forms\programas_sociales.php';
+                require_once 'views/layouts/' . $this->layout;
+                break;
+            case 'educacion':
+                $currentView = 'views\beneficiario\forms\educacion.php';
+                require_once 'views/layouts/' . $this->layout;
+                break;
+            case 'seguridad_social':
+                $currentView = 'views\beneficiario\forms\seguridad_social.php';
+                require_once 'views/layouts/' . $this->layout;
+                break;
+            case 'principal_proveedor':
+                $currentView = 'views\beneficiario\forms\principal_proveedor.php';
+                require_once 'views/layouts/' . $this->layout;
+                break;
+            case 'seguridad_alimentaria':
+                $currentView = 'views\beneficiario\forms\seguridad_alimentaria.php';
+                require_once 'views/layouts/' . $this->layout;
+                break;
+            case 'ubicacion_condiciones_vivienda':
+                $currentView = 'views\beneficiario\forms\ubicacion_condiciones_vivienda.php';
+                require_once 'views/layouts/' . $this->layout;
+                break;
             default:
                 $currentView = 'views\beneficiario\create.php';
                 require_once 'views/layouts/' . $this->layout;
                 break;
         }
-
         // Retorna la vista de del formulario
     }
     public function store()

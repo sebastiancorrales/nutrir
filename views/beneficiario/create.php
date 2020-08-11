@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="css\form-benficiario.css">
 <div class="container-sm">
     <section class="datos-generales">
         <div class="form">

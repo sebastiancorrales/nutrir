@@ -1,5 +1,5 @@
 <div class="contaienr">
-    <section class="ubicacion-vivienda">
+    <section class="ubicacion_vivienda">
         <h1>Ubicacion y condiciones de la vivienda</h1>
         <div class="form">
             <form action="index.php?controller=beneficiario&action=store" method="POST">
