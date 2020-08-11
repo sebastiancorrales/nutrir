@@ -109,9 +109,9 @@
                     Panel administrativo
                   </p>
                   <div class="dropdown-menu dropdown-background" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Unidades de servicio</a>
+                    <a class="dropdown-item" href="index.php?controller=Unidadservicio&action=index">Unidades de servicio</a>
                     <a class="dropdown-item" href="index.php?controller=Programas&action=index">Programas</a>
-                    <a class="dropdown-item" href="#">Convenios</a>
+                    <a class="dropdown-item" href="index.php?controller=Convenio&action=index">Convenios</a>
                     <a class="dropdown-item" href="index.php?controller=TipoPoblacion&action=index">Tipo de población</a>
                     <a class="dropdown-item" href="index.php?controller=PertenenciaEtnica&action=index">Pertenencia etnica</a>
                     <a class="dropdown-item" href="index.php?controller=GrupoEtario&action=index">Grupo Etario</a>

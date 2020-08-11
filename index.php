@@ -33,6 +33,12 @@ switch (ucwords($controller)) {
     case 'Programas':
         $controlador = 'ProgramasController';
         break;
+    case 'Unidadservicio':
+        $controlador = 'UnidadServicioController';
+        break;
+    case 'Convenio':
+        $controlador = 'ConvenioController';
+        break;
     default:
         $controlador = CONTROLADOR_DEFECTO;
         break;
