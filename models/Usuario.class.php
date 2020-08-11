@@ -12,8 +12,17 @@ class Usuario extends BaseModel
     private $profesion;
     private $foto;
 
-    public function __construct()
+    public function __construct($nom = null, $email = null, $pass= null, $tipoDocumento= null, $numeroDocumento= null, $numeroCelular= null, $profesion= null, $foto = null)
     {
+        $this->table = 'users';
+        $this->nombre = $nom;
+        $this->email = $email;
+        $this->password = $pass;
+        $this->tipoDocumento = $tipoDocumento;
+        $this->numeroDocumento = $numeroDocumento;
+        $this->numeroCelular = $numeroCelular;
+        $this->profesion = $profesion;
+        $this->foto = $foto;
         parent::__construct();
     }
 
