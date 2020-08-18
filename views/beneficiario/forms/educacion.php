@@ -4,6 +4,7 @@
         <div class="form">
             <form action="index.php?controller=beneficiario&action=store" method="POST">
                 <input type="hidden" name="type_form" value="datos_educacion">
+                <input type="hidden" name="documento" value="<?php echo $documento ?>">
                 <div class="form-row">
                     <div class="col">
                         <label for="sabe_leer_escribir">¿Sabe leer y escribir?</label>
@@ -15,7 +16,7 @@
                     <div class="col">
                         <label for="nivel_educativo">¿Nivel Educativo?</label>
                         <select class="custom-select" name="nivel_educativo" id="nivel_educativo">
-                            <option value="">Sele</option>
+                            <option value="Sele">Sele</option>
                         </select>
                     </div>
                 </div>

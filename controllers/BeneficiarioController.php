@@ -30,7 +30,7 @@ class BeneficiarioController extends BaseController
     public function create()
     {
         $typeForm = isset($_GET['type_form']) ? $_GET['type_form'] : '';
-        $documento = isset($_GET['id']) ? $_GET['id'] : '';
+        $documento = isset($_GET['id']) ? $_GET['id'] : false;
 
 
         switch ($typeForm) {
@@ -39,6 +39,14 @@ class BeneficiarioController extends BaseController
                 require_once 'views/layouts/' . $this->layout;
                 break;
             case 'datos_poblacionales':
+
+                $pertenciaEtnica = new PerteneciaEtnica();
+                $pertenencias = $pertenciaEtnica->all();
+                $grupoEtario = new GrupoEtario();
+                $grupos = $grupoEtario->all();
+                $tipoPoblacion = new TipoPoblacion();
+                $tipos = $tipoPoblacion->all();
+
                 $currentView = 'views\beneficiario\forms\datos_poblacionales.php';
                 require_once 'views/layouts/' . $this->layout;
                 break;
@@ -109,7 +117,7 @@ class BeneficiarioController extends BaseController
                 break;
             case 'datos_institucionales':
                 print_r($_POST);
-                $documento = isset($_POST['documento'])?$_POST['documento']:'';
+                $documento = isset($_POST['documento']) ? $_POST['documento'] : '';
                 $pais_nacimiento = isset($_POST['pais_nacimiento']) ? $_POST['pais_nacimiento'] : "";
                 $lugar_nacimiento = isset($_POST['lugar_nacimiento']) ? $_POST['lugar_nacimiento'] : "";
                 $fecha_nacimiento = isset($_POST['fecha_nacimiento']) ? $_POST['fecha_nacimiento'] : "";
@@ -144,34 +152,74 @@ class BeneficiarioController extends BaseController
                     $acepta_uso_informacion
                 );
                 $beneficiario->saveInformacionInstitucional();
-                header('Location: index.php?controller=Beneficiario&action=');
-                
+                header('Location: index.php?controller=Beneficiario&action=create&id=' . $documento . '&type_form=datos_poblacionales');
+
+
                 break;
             case 'datos_poblacionales':
-                var_dump($_POST);
+                // var_dump($_POST);
                 // Id del beneficiario
+                $documento = isset($_POST['documento']) ? $_POST['documento'] : '';
                 $pertenencia_etnica = isset($_POST['pertenencia_etnica']) ? $_POST['pertenencia_etnica'] : "";
                 $grupo_etario = isset($_POST['grupo_etario']) ? $_POST['grupo_etario'] : "";
                 $tipo_poblacion = isset($_POST['tipo_poblacion']) ? $_POST['tipo_poblacion'] : "";
+                $beneficiario = new Beneficiario();
+                $beneficiario->informacionPoblacional(
+                    $documento,
+                    $pertenencia_etnica,
+                    $grupo_etario,
+                    $tipo_poblacion
+                );
+                var_dump($beneficiario);
+                $beneficiario->saveInformacionPoblacional();
+                header('Location: index.php?controller=Beneficiario&action=create&id=' . $documento . '&type_form=estructura_familiar');
+
                 break;
             case 'datos_estructura_familiar':
                 var_dump($_POST);
+                // var_dump($_GET);
+                $beneficiario = new Beneficiario();
+                $documento = $_POST['documento'];
+                $ben = $beneficiario->getByDocument($_POST['documento']);
+
                 $nombre_estructura = isset($_POST['nombre_estructura']) ? $_POST['nombre_estructura'] : "";
                 $parentesco_estructura = isset($_POST['parentesco_estructura']) ? $_POST['parentesco_estructura'] : "";
-                $edad_parentesco = isset($_POST['edad_parentesco']) ? $_POST['edad_parentesco'] : "";
+                $fecha_nacimiento = isset($_POST['fecha_nacimiento']) ? $_POST['fecha_nacimiento'] : "";
+
+                $estructura_familiar = new EstructuraFamiliar();
+
+                $estructura_familiar->create($nombre_estructura, $parentesco_estructura, $fecha_nacimiento);
+                $estructura_familiar->save($ben->id);
+
+                header('Location: index.php?controller=Beneficiario&action=create&id=' . $documento . '&type_form=programas_sociales');
 
                 break;
+
             case 'datos_programas_sociales':
-                var_dump($_POST);
+
+
+                $beneficiario = new Beneficiario();
+                $documento = $_POST['documento'];
+                $ben = $beneficiario->getByDocument($_POST['documento']);
+
                 $inscrito_otro_programa_social = isset($_POST['inscrito_otro_programa_social']) ? $_POST['inscrito_otro_programa_social'] : "";
-                $programa_social_inscrito = isset($_POST['programa_social_inscrito']) ? $_POST['programa_social_inscrito'] : "";
-                $inscrito_otro_programa_social = isset($_POST['inscrito_otro_programa_social']) ? $_POST['inscrito_otro_programa_social'] : "";
+                $que_programa = isset($_POST['programa_social_inscrito']) ? $_POST['programa_social_inscrito'] : "";
+                $algun_tipo_subsidio = isset($_POST['algun_tipo_subsidio']) ? $_POST['algun_tipo_subsidio'] : "";
                 $que_tipo_subsidio = isset($_POST['que_tipo_subsidio']) ? $_POST['que_tipo_subsidio'] : "";
                 $ingresos_recibidos = isset($_POST['ingresos_recibidos']) ? $_POST['ingresos_recibidos'] : "";
 
+                $programa_social = new ProgramasSociales();
+                $programa_social->create($inscrito_otro_programa_social, $que_programa, $algun_tipo_subsidio, $que_tipo_subsidio, $ingresos_recibidos);
+                $programa_social->save($ben->id);
+
+                header('Location: index.php?controller=Beneficiario&action=create&id=' . $documento . '&type_form=educacion');
                 break;
             case 'datos_educacion':
                 var_dump($_POST);
+                $beneficiario = new Beneficiario();
+                $documento = $_POST['documento'];
+                $ben = $beneficiario->getByDocument($_POST['documento']);
+
                 $sabe_leer_escribir = isset($_POST['sabe_leer_escribir']) ? $_POST['sabe_leer_escribir'] : "";
                 $nivel_educativo = isset($_POST['nivel_educativo']) ? $_POST['nivel_educativo'] : "";
                 $estudia_actualmente = isset($_POST['estudia_actualmente']) ? $_POST['estudia_actualmente'] : "";
@@ -180,15 +228,44 @@ class BeneficiarioController extends BaseController
                 $realiza_algun_curso = isset($_POST['realiza_algun_curso']) ? $_POST['realiza_algun_curso'] : "";
                 $que_curso_realiza = isset($_POST['que_curso_realiza']) ? $_POST['que_curso_realiza'] : "";
 
+                $educacion = new Educacion();
+                $educacion->create(
+                    $sabe_leer_escribir,
+                    $nivel_educativo,
+                    $estudia_actualmente,
+                    $grado_que_cursa,
+                    $jornada_estudio,
+                    $realiza_algun_curso,
+                    $que_curso_realiza
+                );
+                $educacion->save($ben->id);
                 break;
+                header('Location: index.php?controller=Beneficiario&action=create&id=' . $documento . '&type_form=seguridad_social');
+
             case 'datos_seguridad_social':
-                var_dump($_POST);
+
+                $beneficiario = new Beneficiario();
+                $documento = $_POST['documento'];
+                $ben = $beneficiario->getByDocument($_POST['documento']);
+                // var_dump($_POST);
                 $nombre_eps = isset($_POST['nombre_eps']) ? $_POST['nombre_eps'] : "";
                 $tipo_afiliacion = isset($_POST['tipo_afiliacion']) ? $_POST['tipo_afiliacion'] : "";
                 $tiene_sisben = isset($_POST['tiene_sisben']) ? $_POST['tiene_sisben'] : "";
                 $puntaje_sisben = isset($_POST['puntaje_sisben']) ? $_POST['puntaje_sisben'] : "";
                 $regimen_seguridad_social = isset($_POST['regimen_seguridad_social']) ? $_POST['regimen_seguridad_social'] : "";
                 $diversidad_funcional = isset($_POST['diversidad_funcional']) ? $_POST['diversidad_funcional'] : "";
+
+                $seguridad_social = new SeguridadSocial();
+                $seguridad_social->create(
+                    $nombre_eps,
+                    $tipo_afiliacion,
+                    $tiene_sisben,
+                    $puntaje_sisben,
+                    $regimen_seguridad_social,
+                    $diversidad_funcional
+                );
+                $seguridad_social->save($ben->id);
+                header('Location: index.php?controller=Beneficiario&action=create&id=' . $documento . '&type_form=seguridad_alimentaria');
 
                 break;
             case 'datos_seguridad_alimentaria':

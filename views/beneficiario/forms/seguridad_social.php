@@ -5,6 +5,7 @@
             <h1>Seguridad Social</h1>
             <form action="index.php?controller=beneficiario&action=store" method="POST">
                 <input type="hidden" name="type_form" value="datos_seguridad_social">
+                <input type="hidden" name="documento" value="<?php echo $documento ?>">
                 <div class="form-row">
                     <div class="col">
                         <label for="">Nombre de la EPS</label>
@@ -40,16 +41,16 @@
                     <div class="col">
                         <label for="regimen_seguridad_social">Regimen de Seguridad Social</label>
                         <select class="custom-select" name="regimen_seguridad_social" id="regimen_seguridad_social">
-                            <option value="subsidiado">Subsidiado</option>
-                            <option value="contributivo">contributivo</option>
+                            <option value="1">Subsidiado</option>
+                            <option value="1">contributivo</option>
                         </select>
                     </div>
                     <div class="col">
                         <label for="diversidad_funcional">Diversidad Funcional</label>
                         <select class="custom-select" name="diversidad_funcional" id="diversidad_funcional">
-                            <option value="subsidiado">Si</option>
-                            <option value="contributivo">No</option>
-                            <option value="MoreOptions">MoreOptiones</option>
+                            <option value="1">Si</option>
+                            <option value="1">No</option>
+                            <option value="1">MoreOptiones</option>
                         </select>
                     </div>
                 </div>

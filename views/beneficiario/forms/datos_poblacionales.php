@@ -8,7 +8,13 @@
                     <div class="col">
                         <label for="pertenencia_etnica">Pertenecia Étnica</label>
                         <select class="custom-select" name="pertenencia_etnica" id="pertenencia_etnica">
-                            <option value="">Sele</option>
+                            <?php
+                            foreach ($pertenencias as $pertenencia) {
+                            ?>
+                                <option value="<?php echo $pertenencia->id?>"><?php echo $pertenencia->nombre?></option>
+                            <?php
+                            }
+                            ?>
                         </select>
                     </div>
                 </div>
@@ -16,7 +22,13 @@
                     <div class="col">
                         <label for="grupo_etario">grupo Etario</label>
                         <select class="custom-select" name="grupo_etario" id="grupo_etario">
-                            <option value="">Sele</option>
+                        <?php
+                            foreach ($grupos as $grupo) {
+                            ?>
+                                <option value="<?php echo $grupo->id?>"><?php echo $grupo->nombre?></option>
+                            <?php
+                            }
+                            ?>
                         </select>
                     </div>
                 </div>
@@ -24,10 +36,17 @@
                     <div class="col">
                         <label for="tipo_poblacion">Tipo Población</label>
                         <select class="custom-select" name="tipo_poblacion" id="tipo_poblacion">
-                            <option value="">Sele</option>
+                        <?php
+                            foreach ($tipos as $tipo) {
+                            ?>
+                                <option value="<?php echo $tipo->id?>"><?php echo $tipo->nombre?></option>
+                            <?php
+                            }
+                            ?>
                         </select>
                     </div>
                 </div>
+                <input type="hidden" value="<?php echo $documento?>" name="documento">
                 <input type="submit" value="Guardar" class="btn btn-sm btn-success">
             </form>
         </div>

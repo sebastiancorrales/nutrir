@@ -40,6 +40,23 @@ class Beneficiario extends BaseModel
         parent::__construct();
     }
 
+    public function getByDocument($id)
+    {
+        try {
+            $sql = $this->dbConnection->prepare("SELECT * FROM beneficiarios WHERE numero_documento = :id");
+            $sql->bindParam(':id', $id);
+            $sql->execute();
+            $resultSet = null;
+            while ($row = $sql->fetch(PDO::FETCH_OBJ)) {
+                $resultSet[] = $row;
+            }
+            return $resultSet[0];
+        } catch (PDOException $ex) {
+            echo $ex->getMessage();
+            die();
+        }
+    }
+
     public function informacionGeneral(
         $primerNombre = null,
         $segundoNombre = null,
@@ -93,6 +110,15 @@ class Beneficiario extends BaseModel
         $this->estadoNutricionalIngreso = $estadoNutricionalIngreso;
         $this->autorizaManejoInfo = $autorizaManejoInfo;
     }
+
+    public function informacionPoblacional($documento, $perteneciaEtnica, $grupoEtario, $tipoPoblacion)
+    {
+        $this->numeroDocumento = $documento;
+        $this->fk_pertenenciaEtnica = $perteneciaEtnica;
+        $this->fk_grupoEtario = $grupoEtario;
+        $this->fk_tipoPoblacion = $tipoPoblacion;
+    }
+
     public function saveInformacionInstitucional()
     {
         try {
@@ -201,6 +227,33 @@ class Beneficiario extends BaseModel
             $sql->bindParam(':numero_documento', $numeroDocumento);
             $sql->bindParam(':estado_civil', $estadoCivil);
             $sql->bindParam(':fecha_inscripcion', $fechaInscripcion);
+            $sql->execute();
+        } catch (Error $e) {
+            echo $e;
+        }
+    }
+    public function saveInformacionPoblacional()
+    {
+        try {
+            $documento = $this->getNumeroDocumento();
+            $perteneciaEtnica = $this->getFk_pertenenciaEtnica();
+            $grupoEtario = $this->getFk_grupoEtario();
+            $tipoPoblacion = $this->getFk_tipoPoblacion();
+
+            $sql = $this->dbConnection->prepare(
+                'UPDATE beneficiarios 
+                SET 
+                pertenencia_etnica_id  =:pertenencia_etnica_id , 
+                grupo_etario_id        = :grupo_etario_id, 
+                tipo_poblacion_id      = :tipo_poblacion_id
+                WHERE numero_documento = :numero_documento
+            '
+            );
+            $sql->bindParam(':pertenencia_etnica_id', $perteneciaEtnica);
+            $sql->bindParam(':grupo_etario_id', $grupoEtario);
+            $sql->bindParam(':tipo_poblacion_id', $tipoPoblacion);
+            $sql->bindParam(':numero_documento', $documento);
+
             $sql->execute();
         } catch (Error $e) {
             echo $e;

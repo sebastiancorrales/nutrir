@@ -3,7 +3,7 @@ include_once 'core\BaseModel.php';
 
 class ProgramasSociales extends BaseModel
 {
-    private $incritoEnOtroPrograma;
+    private $inscritoEnOtroPrograma;
     private $quePorgrama;
     private $algunTipoSubsidio;
     private $cualSubsidio;
@@ -11,32 +11,46 @@ class ProgramasSociales extends BaseModel
 
     public function __construct()
     {
+        $this->table = "programas_sociales";
         parent::__construct();
+    }
+
+    public function create($inscritoEnOtroPrograma, $quePorgrama = null, $algunTipoSubsidio = null, $cualSubsidio = null, $ingresosRecibidos = null)
+    {
+        $this->inscritoEnOtroPrograma = $inscritoEnOtroPrograma;
+        $this->quePorgrama = $quePorgrama;
+        $this->algunTipoSubsidio = $algunTipoSubsidio;
+        $this->cualSubsidio = $cualSubsidio;
+        $this->ingresosRecibidos = $ingresosRecibidos;
+    }
+    public function save($id)
+    {
+        $inscritoEnOtroPrograma = $this->getInscritoEnOtroPrograma();
+        $quePorgrama = $this->getQuePorgrama();
+        $algunTipoSubsidio = $this->getAlgunTipoSubsidio();
+        $cualSubsidio = $this->getCualSubsidio();
+        $ingresosRecibidos = $this->getIngresosRecibidos();
+        $sql = $this->dbConnection->prepare('INSERT INTO programas_sociales
+        (inscrito_otro_programa, que_programa, algun_tipo_subsidio, cual_subsidio, ingresos_recibidos, beneficiario_id)
+        VALUES (?,?,?,?,?,?)');
+
+        $sql->bindParam(1, $inscritoEnOtroPrograma);
+        $sql->bindParam(2, $quePorgrama);
+        $sql->bindParam(3, $algunTipoSubsidio);
+        $sql->bindParam(4, $cualSubsidio);
+        $sql->bindParam(5, $ingresosRecibidos);
+        $sql->bindParam(6, $id);
+        $sql->execute();
     }
 
     /**
      * Get the value of incritoEnOtroPrograma
-     */ 
-    public function getIncritoEnOtroPrograma()
-    {
-        return $this->incritoEnOtroPrograma;
-    }
+     */
 
-    /**
-     * Set the value of incritoEnOtroPrograma
-     *
-     * @return  self
-     */ 
-    public function setIncritoEnOtroPrograma($incritoEnOtroPrograma)
-    {
-        $this->incritoEnOtroPrograma = $incritoEnOtroPrograma;
-
-        return $this;
-    }
 
     /**
      * Get the value of quePorgrama
-     */ 
+     */
     public function getQuePorgrama()
     {
         return $this->quePorgrama;
@@ -46,7 +60,7 @@ class ProgramasSociales extends BaseModel
      * Set the value of quePorgrama
      *
      * @return  self
-     */ 
+     */
     public function setQuePorgrama($quePorgrama)
     {
         $this->quePorgrama = $quePorgrama;
@@ -56,7 +70,7 @@ class ProgramasSociales extends BaseModel
 
     /**
      * Get the value of algunTipoSubsidio
-     */ 
+     */
     public function getAlgunTipoSubsidio()
     {
         return $this->algunTipoSubsidio;
@@ -66,7 +80,7 @@ class ProgramasSociales extends BaseModel
      * Set the value of algunTipoSubsidio
      *
      * @return  self
-     */ 
+     */
     public function setAlgunTipoSubsidio($algunTipoSubsidio)
     {
         $this->algunTipoSubsidio = $algunTipoSubsidio;
@@ -76,7 +90,7 @@ class ProgramasSociales extends BaseModel
 
     /**
      * Get the value of cualSubsidio
-     */ 
+     */
     public function getCualSubsidio()
     {
         return $this->cualSubsidio;
@@ -86,7 +100,7 @@ class ProgramasSociales extends BaseModel
      * Set the value of cualSubsidio
      *
      * @return  self
-     */ 
+     */
     public function setCualSubsidio($cualSubsidio)
     {
         $this->cualSubsidio = $cualSubsidio;
@@ -96,7 +110,7 @@ class ProgramasSociales extends BaseModel
 
     /**
      * Get the value of ingresosRecibidos
-     */ 
+     */
     public function getIngresosRecibidos()
     {
         return $this->ingresosRecibidos;
@@ -106,10 +120,30 @@ class ProgramasSociales extends BaseModel
      * Set the value of ingresosRecibidos
      *
      * @return  self
-     */ 
+     */
     public function setIngresosRecibidos($ingresosRecibidos)
     {
         $this->ingresosRecibidos = $ingresosRecibidos;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of inscritoEnOtroPrograma
+     */
+    public function getInscritoEnOtroPrograma()
+    {
+        return $this->inscritoEnOtroPrograma;
+    }
+
+    /**
+     * Set the value of inscritoEnOtroPrograma
+     *
+     * @return  self
+     */
+    public function setInscritoEnOtroPrograma($inscritoEnOtroPrograma)
+    {
+        $this->inscritoEnOtroPrograma = $inscritoEnOtroPrograma;
 
         return $this;
     }

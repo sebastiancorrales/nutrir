@@ -1,6 +1,5 @@
 <div class="container">
     <section class="datos-institucionales">
-
         <div class="form">
             <h1>Datos Institucionales</h1>
             <form action="index.php?controller=beneficiario&action=store" method="POST">
