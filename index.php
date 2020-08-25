@@ -39,6 +39,15 @@ switch (ucwords($controller)) {
     case 'Convenio':
         $controlador = 'ConvenioController';
         break;
+    case 'Vacunas':
+        $controlador = 'VacunaController';
+        break;
+    case 'DiversidadFuncional':
+        $controlador = 'DiversidadFuncionalController';
+        break;
+    case 'RegimenSeguridadSocial':
+        $controlador = 'RegimenSeguridadSocialController';
+        break;
     case 'Login':
         $controlador = 'LoginController';
         break;

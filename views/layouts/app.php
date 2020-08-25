@@ -116,9 +116,9 @@
                     <a class="dropdown-item" href="index.php?controller=TipoPoblacion&action=index">Tipo de población</a>
                     <a class="dropdown-item" href="index.php?controller=PertenenciaEtnica&action=index">Pertenencia etnica</a>
                     <a class="dropdown-item" href="index.php?controller=GrupoEtario&action=index">Grupo Etario</a>
-                    <a class="dropdown-item" href="#">Regimen de seguiridad social</a>
-                    <a class="dropdown-item" href="#">Diversidad funcional</a>
-                    <a class="dropdown-item" href="#">Vacunas</a>
+                    <a class="dropdown-item" href="index.php?controller=RegimenSeguridadSocial&action=index">Regimen de seguiridad social</a>
+                    <a class="dropdown-item" href="index.php?controller=DiversidadFuncional&action=index">Diversidad funcional</a>
+                    <a class="dropdown-item" href="index.php?controller=vacunas&action=index">Vacunas</a>
                   </div>
                 </a>
 
