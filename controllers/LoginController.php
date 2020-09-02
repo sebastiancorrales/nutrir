@@ -14,48 +14,30 @@ class LoginController extends BaseController
         if (isset($_POST['txtEmail']) && $_POST['txtPassword'])
         {
             $email = isset($_POST['txtEmail']) ? trim($_POST['txtEmail']): "";
-            $pass =  isset($_POST['txtPassword']) ? trim($_POST['txtPassword']): "";
+            $password =  isset($_POST['txtPassword']) ? trim($_POST['txtPassword']): "";
             $errors = "";
 
-            if ($email == '' || $pass == '') {
+            if ($email == '' || $password == '') {
                 $errors = "El usuario y contraseña no pueden ser vacios";
                 require_once "views/layouts/".$this->layout;
             }
             else
             {
-                if (isset($_POST['txtRol'])) {
-                    $rol = isset($_POST['txtRol']) ? trim(($_POST['txtRol'])):"";
+                if (isset($_POST['email'])) {
 
-                    if ($rol == 'Doctor') 
-                    {
-                        $doctor = new Doctor();
-                        $doctor -> setEmail($email);
-                        $doctor -> setPassword($pass);
+                        $usuario = new Usuario();
+                        $usuario -> setEmail($email);
+                        $usuario -> setPassword($password);
 
-                        if($doctor->validarLogin())
+                        if($usuario->validarLogin())
                         {
-                            header("Location:index.php?controller=Doctor&action=index");
+                            // header("Location: index.php?controller=Vacunas&action=index");
                         }
                         else
                         {
                             $errors = "El usuario o contraseña son incorrectos";
                             require_once 'views/layouts/'.$this->layout;
-                        }
-                    }elseif ($rol == 'Paciente') {
-                        $paciente = new Paciente();
-                        $paciente -> setEmail($email);
-                        $paciente -> setPassword($pass);
-                        
-                        if($paciente->validarLogin())
-                        {
-                            header("Location:index.php?controller=Paciente&action=index");
-                        }
-                        else
-                        {
-                            $errors = "El usuario o contraseña son incorrectos";
-                            require_once 'views/layouts/'.$this->layout;
-                        }
-                    }
+                        }                    
                 } 
                 echo  json_encode(array('error' => false));
             }
@@ -95,10 +77,5 @@ class LoginController extends BaseController
     {
         $current_view = 'Login/create.php';
         require_once 'views/layouts/' . $this->layout;
-    }
-    public function store()
-    {
-    
-        
     }
 }

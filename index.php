@@ -51,6 +51,9 @@ switch (ucwords($controller)) {
     case 'Login':
         $controlador = 'LoginController';
         break;
+    case 'Usuario':
+        $controlador = 'UsuarioController';
+        break;
     default:
         $controlador = CONTROLADOR_DEFECTO;
         break;

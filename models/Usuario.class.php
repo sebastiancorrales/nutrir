@@ -4,6 +4,7 @@ include_once 'core\BaseModel.php';
 class Usuario extends BaseModel
 {
     private $nombre;
+    private $apellido;
     private $email;
     private $password;
     private $tipoDocumento;
@@ -12,18 +13,82 @@ class Usuario extends BaseModel
     private $profesion;
     private $foto;
 
-    public function __construct($nom = null, $email = null, $pass= null, $tipoDocumento= null, $numeroDocumento= null, $numeroCelular= null, $profesion= null, $foto = null)
+    public function __construct($nom = null,$apell = null ,$email = null, $pass= null, $tipoDocumento= null, $numeroDocumento= null, $numeroCelular= null, $profesion= null, $foto = null)
     {
         $this->table = 'users';
         $this->nombre = $nom;
+        $this->apellido = $apell;
         $this->email = $email;
-        $this->password = $pass;
+        $this->password = password_hash($pass, PASSWORD_BCRYPT);
         $this->tipoDocumento = $tipoDocumento;
         $this->numeroDocumento = $numeroDocumento;
         $this->numeroCelular = $numeroCelular;
         $this->profesion = $profesion;
         $this->foto = $foto;
         parent::__construct();
+    }
+    public function save()
+    {
+        try {
+            $nombre = $this->getNombre();
+            $apellido = $this->getApellido();
+            $email = $this->getEmail();
+            $password = $this->getPassword();
+            $tipoDocumento = $this->getTipoDocumento();
+            $numeroDocumento = $this->getNumeroDocumento();
+            $numeroCelular = $this->getNumeroCelular();
+            $profesion = $this->getProfesion();
+            $foto = $this->getFoto();
+            $sql = $this->dbConnection->prepare(
+                'INSERT INTO users (nombre, apellido, email, password, tipo_documento, numero_documento, celular, profesion, foto) 
+                 VALUES (:nombre, :apellido , :email, :password, :tipo_documento, :numero_documento, :celular, :profesion, :foto)'
+            );
+            $sql->bindParam(':nombre', $nombre);
+            $sql->bindParam(':apellido', $apellido);
+            $sql->bindParam(':email', $email);
+            $sql->bindParam(':password', $password);
+            $sql->bindParam(':tipo_documento', $tipoDocumento);
+            $sql->bindParam(':numero_documento', $numeroDocumento);
+            $sql->bindParam(':celular', $numeroCelular);
+            $sql->bindParam(':profesion', $profesion);
+            $sql->bindParam(':foto', $foto);
+
+            $sql->execute();
+        } catch (Error $e) {
+            echo $e;
+        }
+    }
+    public function validarLogin()
+    {
+        try
+        {
+            $sql = $this->dbConnection->prepare("SELECT * FROM users WHERE email = ?");
+            $email = $this->getEmail();
+            $sql->bindParam(1, $email);
+            // ejecutamos
+            $sql->execute();
+            $resulSet = array();
+            // Ahora vamos a indicar el fecth mode cuando llamamos a fetch_
+            while($row = $sql->fetch(PDO::FETCH_OBJ)){
+                $resulSet[] = $row;
+            }
+            // Si encuentra el usuario
+            if(count($resulSet) > 0 ){              
+                $contra = $this->password;
+                $hash = $resulSet[0]->password;
+                if (password_verify($contra, $hash )) {                                      
+                    $_SESSION['nombre'] = $resulSet[0]->nombre;
+                    $_SESSION['id_usuario']= $resulSet[0]->id;
+                    $_SESSION['timeout']= time();
+                    session_regenerate_id();
+                    return true;
+                }
+            }
+            return false;
+        } catch(PDOException $ex){
+            echo $ex->getMessage();
+            die();
+        }
     }
 
     /**
@@ -46,6 +111,17 @@ class Usuario extends BaseModel
         return $this;
     }
 
+    public function getApellido()
+    {
+        return $this->apellido;
+    }
+
+    public function setApellido($apellido)
+    {
+        $this->apellido = $apellido;
+
+        return $this;
+    }
     /**
      * Get the value of email
      */ 

@@ -6,7 +6,7 @@
         <br>
         <hr>
         <p class="card-text">
-            <form action="">
+            <form action="index.php?controller=Login&action=initLogin">
                 <div class="form-row">
                     <div class="col">
                         <label for="">Correo Electronico</label>
@@ -20,11 +20,10 @@
                         <input type="password" name="txtPassword" placeholder="..." class="form-control">
                     </div>
                 </div>
+                <br><br><button type="submit" id="btn-enviar" class="btn btn-outline-success btn-block">Ingresar</button>
             </form>
         </p>
-        <hr>
-        <a href="#" class="btn btn-outline-success btn-block">Ingresar</a><br>
-
+        <hr>  
         <a href="index.php?controller=Login&action=create" class="btn btn-outline-primary btn-block">Registrate</a>
         <p class="mt-2 text-center"><a href="#">Olvide mi contraseña</a></p>
       </div>
